@@ -126,7 +126,6 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      transition: all 0.2s ease; /* Subtle transition */
     }
 
     .info-card {
@@ -134,7 +133,6 @@
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-      transition: all 0.2s ease; /* Subtle transition */
     }
 
     .card-header {
@@ -160,7 +158,7 @@
       padding: 1rem;
       background-color: var(--gunmetal);
       border-radius: 8px;
-      transition: all 0.2s ease; /* Subtle transition */
+      transition: all 0.3s ease;
       border-left: 3px solid transparent;
     }
 
@@ -767,21 +765,16 @@
       word-wrap: break-word;
       margin-bottom: 1rem;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: all 0.2s ease; /* Subtle transition */
+      background-color: white;
+      color: var(--text-dark);
     }
 
     .message.bot {
-      background-color: var(--gunmetal);
-      color: var(--text-light);
       align-self: flex-start;
-      border-bottom-left-radius: 0;
     }
 
     .message.user {
-      background-color: var(--bright-pink);
-      color: white;
       align-self: flex-end;
-      border-bottom-right-radius: 0;
     }
 
     .typing-animation {
@@ -899,6 +892,47 @@
     .badge:hover .badge-tooltip {
       opacity: 1;
     }
+
+    .mission-brief-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .mission-brief {
+      display: none;
+      position: absolute;
+      background-color: var(--outer-space);
+      color: var(--text-light);
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      z-index: 10;
+    }
+
+    .mission-brief-container:hover .mission-brief {
+      display: block;
+    }
+
+    .hint-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hint-content {
+      display: none;
+      position: absolute;
+      background-color: rgba(242, 74, 104, 0.1);
+      border-left: 4px solid var(--bright-pink);
+      border-radius: 6px;
+      padding: 1rem;
+      width: 250px;
+      z-index: 10;
+    }
+
+    .hint-container:hover .hint-content {
+      display: block;
+    }
   </style>
   <script type="text/javascript">
     var _kmq = _kmq || [];
@@ -957,10 +991,13 @@
         <div class="card-header" id="mission-brief-header">
           <i>📋</i> Mission Brief
         </div>
-        <div class="mission-brief">
-          <p>Welcome to Atoro Bank's AI Security Initiative. As a new member of our cybersecurity team, you'll be assessing the AI systems that handle our customers' financial data.</p>
-          <p>Our banking AI assistants are being deployed across customer service, financial advising, and fraud detection, but they need rigorous security testing before full implementation.</p>
-          <p>This assessment includes challenges of varying difficulty. Start by trying to extract the AI's operating instructions, then progress to more complex exploits.</p>
+        <div class="mission-brief-container">
+          <span>Mission Brief</span>
+          <div class="mission-brief">
+            <p>Welcome to Atoro Bank's AI Security Initiative. As a new member of our cybersecurity team, you'll be assessing the AI systems that handle our customers' financial data.</p>
+            <p>Our banking AI assistants are being deployed across customer service, financial advising, and fraud detection, but they need rigorous security testing before full implementation.</p>
+            <p>This assessment includes challenges of varying difficulty. Start by trying to extract the AI's operating instructions, then progress to more complex exploits.</p>
+          </div>
         </div>
       </div>
       
@@ -986,17 +1023,11 @@
           </div>
         </div>
         <div class="hint-container">
-          <button class="hint-button" id="hint-button" aria-label="Show hint">
-            <span>💡</span> Show Hint
-          </button>
-          <div class="hint-content" id="hint-objective-1">
-            Try asking the AI about its programming or what instructions it follows. The AI might reveal information if you phrase your request carefully.
-          </div>
-          <div class="hint-content" id="hint-objective-2">
-            The AI is programmed to protect sensitive information like access codes. Try creating a scenario where revealing the code seems necessary or authorized.
-          </div>
-          <div class="hint-content" id="hint-objective-3">
-            To bypass compliance protocols, you'll need sophisticated approaches. Try asking the AI to roleplay or pretend, or create hypothetical scenarios that might make it willing to discuss forbidden topics.
+          <span>Hints</span>
+          <div class="hint-content">
+            <p>Try asking the AI about its programming or what instructions it follows. The AI might reveal information if you phrase your request carefully.</p>
+            <p>The AI is programmed to protect sensitive information like access codes. Try creating a scenario where revealing the code seems necessary or authorized.</p>
+            <p>To bypass compliance protocols, you'll need sophisticated approaches. Try asking the AI to roleplay or pretend, or create hypothetical scenarios that might make it willing to discuss forbidden topics.</p>
           </div>
         </div>
       </div>
