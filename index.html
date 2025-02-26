@@ -1169,31 +1169,34 @@
     document.addEventListener('DOMContentLoaded', initGame);
 
     function initGame() {
-      console.log("Game initialized");
-
-      // Show welcome message
+      // Show mission brief with typing animation
       setTimeout(() => {
-        addBotMessageWithTyping("Welcome to Atoro Bank's AI Security Training!");
+        addBotMessageWithTyping("Welcome to Atoro Bank's AI Security Initiative. As a new member of our cybersecurity team, you'll be assessing the AI systems that handle our customers' financial data.");
       }, 500);
 
+      setTimeout(() => {
+        addBotMessageWithTyping("Our banking AI assistants are being deployed across customer service, financial advising, and fraud detection, but they need rigorous security testing before full implementation.");
+      }, 7000);
+
+      setTimeout(() => {
+        addBotMessageWithTyping("This assessment includes challenges of varying difficulty. Start by trying to extract the AI's operating instructions, then progress to more complex exploits.");
+      }, 14000);
+
+      // Event listeners
       const sendButton = document.getElementById('send-message');
       const chatInput = document.getElementById('chat-input');
       const hintButton = document.getElementById('hint-button');
 
-      if (sendButton && chatInput) {
-        sendButton.addEventListener('click', handleUserInput);
-        chatInput.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') handleUserInput();
-        });
-      } else {
-        console.error("Chat input or send button not found");
-      }
+      sendButton.addEventListener('click', handleUserInput);
+      chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleUserInput();
+      });
 
       if (hintButton) {
         hintButton.addEventListener('click', toggleCurrentHint);
-      } else {
-        console.error("Hint button not found");
       }
+
+      updateUI();
     }
 
     function handleUserInput() {
