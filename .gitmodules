@@ -1,0 +1,3 @@
+[submodule "atoro-ai-hacking-game"]
+    path = atoro-ai-hacking-game
+    url = https://github.com/Tom353Atoro/atoro-ai-hacking-game.git
