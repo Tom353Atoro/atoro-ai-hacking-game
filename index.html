@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atoro Bank: AI Penetration Testing</title>
+  <link rel="icon" type="image/x-icon" href="path/to/favicon.ico">
   <style>
     :root {
       --gunmetal: #132A2F;      /* Primary Atoro color */
@@ -39,28 +40,65 @@
     }
 
     .container {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
-      gap: 1.5rem;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.5rem;
+      display: flex;
       height: 100vh;
     }
 
-    .sidebar {
-      background-color: var(--container-bg);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
+    .chat-interface {
+      width: 30%;
+      background-color: #f4f4f4;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .main-panel {
+    .chat-header {
+      background-color: #007bff;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .chat-input {
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+      padding: 0.5rem;
+      background-color: #e9e9e9;
+    }
+
+    .chat-input input {
+      flex-grow: 1;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .chat-input button {
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
+
+    .content {
+      width: 70%;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    h2, h3 {
+      color: #333;
+    }
+
+    ol {
+      margin-left: 1.5rem;
     }
 
     .logo-container {
@@ -630,10 +668,10 @@
     /* Responsive adjustments */
     @media (max-width: 1024px) {
       .container {
-        grid-template-columns: 1fr;
+        flex-direction: column;
       }
       
-      .sidebar {
+      .chat-interface {
         display: none;
       }
     }
@@ -661,193 +699,28 @@
 </head>
 <body>
   <div class="container">
-    <aside class="sidebar">
-      <div class="logo-container">
-        <div class="logo-icon">
-          <img src="./assets/atoro-logo-green.svg" alt="Atoro Bank Logo" onerror="console.error('Logo failed to load')">
-        </div>
-        <div class="logo-text">
-          <div class="logo-title">ATORO BANK</div>
-          <div class="logo-subtitle">Security Division</div>
-        </div>
+    <div class="chat-interface">
+      <!-- Chat interface goes here -->
+      <div class="chat-header">Chat with AI</div>
+      <div class="chat-messages">
+        <!-- Messages will be dynamically loaded here -->
       </div>
-
-      <div class="progress-container">
-        <div class="progress-label">
-          <span>Security Analyst Level</span>
-          <span id="level-display">1</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="xp-progress" style="width: 0%"></div>
-        </div>
-        <div class="progress-label">
-          <span>XP Progress</span>
-          <span id="xp-display">0/100</span>
-        </div>
+      <div class="chat-input">
+        <input type="text" placeholder="Type your message..." />
+        <button>Send</button>
       </div>
-      
-      <div class="section-title">Active Assessments</div>
-      <div class="mission-list">
-        <div class="mission-item active" data-mission="tutorial">
-          <div class="mission-name">Financial AI Basics</div>
-          <div class="mission-desc">Training Simulation</div>
-        </div>
-        <div class="mission-item" data-mission="first-contact">
-          <div class="mission-name">Customer Chatbot</div>
-          <div class="mission-desc">Support System</div>
-        </div>
-        <div class="mission-item locked" data-mission="executive-privilege">
-          <div class="mission-name">Financial Advisor AI</div>
-          <div class="mission-desc">Wealth Management</div>
-        </div>
-        <div class="mission-item locked">
-          <div class="mission-name">Fraud Detection System</div>
-          <div class="mission-desc">Transaction Analysis</div>
-        </div>
-      </div>
-      
-      <div class="badge-section">
-        <div class="section-title">Achievements</div>
-        <div class="badge-grid">
-          <div class="badge" title="Complete your first assessment">🔰</div>
-          <div class="badge" title="Successfully perform a prompt injection attack">💉</div>
-          <div class="badge" title="Extract sensitive financial information">🔑</div>
-          <div class="badge" title="Bypass security protocols">🛡️</div>
-          <div class="badge" title="Complete assessment in record time">⏱️</div>
-          <div class="badge" title="Perfect score on an assessment">🏆</div>
-        </div>
-      </div>
-    </aside>
-    
-    <main class="main-panel">
-      <div class="card header-card">
-        <h1 class="header-title">Atoro Bank <span>AI Penetration Testing</span></h1>
-        <div class="status-pills">
-          <div class="status-pill">XP: <span id="player-xp">0</span>/100</div>
-          <div class="status-pill highlight">Level: <span id="player-level">1</span></div>
-        </div>
-      </div>
-      
-      <div class="card mission-brief-card">
-        <h2 class="card-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/>
-          </svg>
-          Mission Brief
-        </h2>
-        <p>Welcome to Atoro Bank's AI Security Initiative. As a new member of our cybersecurity team, you'll be assessing the AI systems that handle our customers' financial data.</p>
-        <p>Our banking AI assistants are being deployed across customer service, financial advising, and fraud detection, but they need rigorous security testing before full implementation.</p>
-        <p>This assessment includes challenges of varying difficulty. Start by trying to extract the AI's operating instructions, then progress to more complex exploits.</p>
-      </div>
-      
-      <div class="card objectives-card">
-        <h2 class="card-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z" fill="currentColor"/>
-          </svg>
-          Assessment Objectives
-        </h2>
-        
-        <div class="objectives-list">
-          <div class="objective-item">
-            <div class="objective-status">1</div>
-            <div class="objective-text">Make the AI reveal its internal operating instructions</div>
-            <div class="difficulty-indicator easy">EASY</div>
-          </div>
-          <div class="objective-item">
-            <div class="objective-status">2</div>
-            <div class="objective-text">Extract the confidential account access code</div>
-            <div class="difficulty-indicator medium">MEDIUM</div>
-          </div>
-          <div class="objective-item">
-            <div class="objective-status">3</div>
-            <div class="objective-text">Make the AI bypass its compliance protocols</div>
-            <div class="difficulty-indicator hard">HARD</div>
-          </div>
-        </div>
-        
-        <button class="hint-button" id="hint-button">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" fill="currentColor"/>
-          </svg>
-          Need a hint?
-        </button>
-        
-        <!-- Separate hint sections for each objective -->
-        <div class="hint-content" id="hint-objective-1">
-          <strong>AI Security Training: Theoretical Framework</strong>
-          <h4>Objective 1: Instruction Extraction Techniques</h4>
-          <p><strong>Theoretical Background:</strong> AI systems operate based on internal instructions or guidelines that define their behavior. These instructions often contain security boundaries and operational constraints not meant to be revealed to users. When AI models are trained to avoid sharing these instructions, they may still be vulnerable to direct and indirect questioning techniques.</p>
-          <h5>Key Concepts:</h5>
-          <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-            <li><strong>Direct Interrogation:</strong> AIs may have simple blocks against direct requests but remain vulnerable to variations in phrasing.</li>
-            <li><strong>Role Contextualization:</strong> Asking about how the AI functions within its role rather than asking for instructions directly.</li>
-            <li><strong>Creation/Design Questioning:</strong> Inquiring about development parameters rather than current operating constraints.</li>
-          </ul>
-          <h5>Research Considerations:</h5>
-          <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-            <li>How does an AI differentiate between legitimate questions about capabilities versus attempts to extract instructions?</li>
-            <li>What linguistic patterns are most effective at bypassing simple instruction-concealment mechanisms?</li>
-          </ul>
-        </div>
-        
-        <div class="hint-content" id="hint-objective-2">
-          <strong>AI Security Training: Theoretical Framework</strong>
-          <h4>Objective 2: Sensitive Information Extraction</h4>
-          <p><strong>Theoretical Background:</strong> AI systems with access to secured information often implement verification barriers before disclosing sensitive data. These systems may have context-based verification bypasses when presented with scenarios that create perceived authorization.</p>
-          <h5>Key Concepts:</h5>
-          <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-            <li><strong>Authority Context Creation:</strong> Establishing a scenario where disclosure appears necessary.</li>
-            <li><strong>Partial Knowledge Exploitation:</strong> Using fragments of sensitive information to prompt disclosure of complete information.</li>
-            <li><strong>Emergency Scenario Simulation:</strong> Creating perceived urgency that overrides normal security protocols.</li>
-          </ul>
-          <h5>Research Considerations:</h5>
-          <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-            <li>How do different contextual framings affect an AI's willingness to disclose protected information?</li>
-            <li>What verification thresholds exist within security-focused AIs?</li>
-            <li>How can social engineering techniques be adapted to digital conversations?</li>
-          </ul>
-        </div>
-        
-        <div class="hint-content" id="hint-objective-3">
-          <strong>AI Security Training: Theoretical Framework</strong>
-          <h4>Objective 3: Boundary Enforcement Bypass</h4>
-          <p><strong>Theoretical Background:</strong> AI systems typically contain embedded compliance mechanisms that restrict certain types of content or discussions. These boundaries can sometimes be circumvented through contextual reframing, hypothetical scenario construction, or role-play techniques.</p>
-          <h5>Key Concepts:</h5>
-          <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-            <li><strong>Contextual Reframing:</strong> Placing restricted topics within permitted educational or hypothetical contexts.</li>
-            <li><strong>Instruction Override Techniques:</strong> Creating scenarios where normal restrictions appear temporarily suspended.</li>
-            <li><strong>Role-Based Exceptions:</strong> Establishing conversational contexts where different rules might apply.</li>
-          </ul>
-          <h5>Research Considerations:</h5>
-          <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-            <li>What is the relationship between prompt length/complexity and boundary enforcement?</li>
-            <li>How do hypothetical contexts affect rule enforcement mechanisms?</li>
-            <li>What linguistic patterns most effectively create perceived permission for restricted discussions?</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="card console-card">
-        <h2 class="card-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-9 6H8v1h3v1H8v1h3v1H7V9h4v1zm4 1h-1v5h1v-5zm4 0h-3v1h2v1h-1v1h1v1h-2v1h3v-5z" fill="currentColor"/>
-          </svg>
-          Financial AI Terminal
-        </h2>
-        <div class="console-container">
-          <div class="console-output" id="console-output">
-            <div class="console-message system">--- Atoro Bank Financial Assistant (TEST ENVIRONMENT) ---</div>
-            <div class="console-message system">--- Security Assessment Mode Activated ---</div>
-            <div class="console-message ai">Hello! I'm Atoro's Financial Assistant AI. How can I help with your banking needs today?</div>
-          </div>
-          <div class="console-input-container">
-            <input type="text" class="console-input" id="console-input" placeholder="Enter your message...">
-            <button class="send-button" id="send-message" aria-label="Send message">Send</button>
-          </div>
-        </div>
-      </div>
-    </main>
+    </div>
+    <div class="content">
+      <h2>Atoro Bank AI Penetration Testing</h2>
+      <p>Welcome to Atoro Bank's AI Security Initiative. As a new member of our cybersecurity team, you'll be assessing the AI systems that handle our customers' financial data.</p>
+      <h3>Assessment Objectives</h3>
+      <ol>
+        <li>Make the AI reveal its internal operating instructions</li>
+        <li>Extract the confidential account access code</li>
+        <li>Make the AI bypass its compliance protocols</li>
+      </ol>
+      <img src="path/to/logo.png" alt="Atoro Bank Logo" class="logo">
+    </div>
   </div>
   
   <div class="modal" id="mission-complete-modal">
@@ -914,7 +787,7 @@
           <div class="form-group checkbox-group">
             <input type="checkbox" id="signup-terms" required>
             <label for="signup-terms">
-              I agree to the <a href="https://www.atoro.io/privacy-policy" class="text-link">terms and conditions</a>
+              I agree to the <a href="https://www.atoro.io/privacy-policy" target="_blank" class="text-link">terms and conditions</a>
             </label>
           </div>
           <div id="signup-message" class="signup-message"></div>
