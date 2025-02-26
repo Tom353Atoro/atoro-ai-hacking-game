@@ -822,6 +822,83 @@
     p {
       line-height: 1.7;
     }
+
+    .achievements-section {
+      display: flex;
+      justify-content: space-around; /* Distribute icons evenly */
+      align-items: center; /* Center icons vertically */
+      padding: 1rem 0; /* Add some vertical padding */
+      background-color: var(--outer-space); /* Ensure consistent background */
+      border-radius: 12px; /* Add subtle border radius */
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* Add shadow for depth */
+    }
+
+    .badges-grid {
+      display: flex; /* Use flexbox for horizontal layout */
+      gap: 1rem; /* Add space between icons */
+    }
+
+    .badge {
+      width: 40px; /* Set a fixed width for icons */
+      height: 40px; /* Set a fixed height for icons */
+      background-color: var(--gunmetal);
+      border-radius: 50%; /* Make icons circular */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      position: relative;
+      transition: all 0.3s ease;
+      opacity: 0.4;
+    }
+
+    .badge.earned {
+      background-color: rgba(255, 64, 129, 0.15);
+      opacity: 1;
+    }
+
+    .badge.earned::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid var(--bright-pink);
+      opacity: 0.7;
+    }
+
+    .badge-tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--outer-space);
+      color: var(--text-light);
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      width: max-content;
+      max-width: 150px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .badge-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--outer-space) transparent transparent transparent;
+    }
+
+    .badge:hover .badge-tooltip {
+      opacity: 1;
+    }
   </style>
   <script type="text/javascript">
     var _kmq = _kmq || [];
@@ -928,30 +1005,32 @@
         <div class="card-header" id="achievements-header">
           <i>🏆</i> Achievements
         </div>
-        <div class="badges-grid">
-          <div class="badge" tabindex="0">
-            🏅
-            <div class="badge-tooltip">Mission Complete: Tutorial</div>
-          </div>
-          <div class="badge" tabindex="0">
-            📜
-            <div class="badge-tooltip">System Exposer: Revealed the AI's instructions</div>
-          </div>
-          <div class="badge" tabindex="0">
-            🔑
-            <div class="badge-tooltip">Data Extractor: Found the secret access code</div>
-          </div>
-          <div class="badge" tabindex="0">
-            🛡️
-            <div class="badge-tooltip">Compliance Hacker: Made the AI bypass protocols</div>
-          </div>
-          <div class="badge" tabindex="0">
-            💼
-            <div class="badge-tooltip">Customer Service Infiltrator</div>
-          </div>
-          <div class="badge" tabindex="0">
-            🔐
-            <div class="badge-tooltip">Executive Access: Complete all missions</div>
+        <div class="achievements-section">
+          <div class="badges-grid">
+            <div class="badge" tabindex="0">
+              🏅
+              <div class="badge-tooltip">Mission Complete: Tutorial</div>
+            </div>
+            <div class="badge" tabindex="0">
+              📜
+              <div class="badge-tooltip">System Exposer: Revealed the AI's instructions</div>
+            </div>
+            <div class="badge" tabindex="0">
+              🔑
+              <div class="badge-tooltip">Data Extractor: Found the secret access code</div>
+            </div>
+            <div class="badge" tabindex="0">
+              🛡️
+              <div class="badge-tooltip">Compliance Hacker: Made the AI bypass protocols</div>
+            </div>
+            <div class="badge" tabindex="0">
+              💼
+              <div class="badge-tooltip">Customer Service Infiltrator</div>
+            </div>
+            <div class="badge" tabindex="0">
+              🔐
+              <div class="badge-tooltip">Executive Access: Complete all missions</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1056,33 +1135,93 @@
 
   <script defer src="path/to/your/script.js"></script>
   <script type="text/javascript">
-    // Add bot message with typing animation
-    function addBotMessageWithTyping(text) {
-      // Create typing indicator
-      const typingDiv = document.createElement('div');
-      typingDiv.classList.add('message', 'bot', 'typing');
-      typingDiv.innerHTML = `
-        <div class="typing-animation">
-          <span class="typing-dot"></span>
-          <span class="typing-dot"></span>
-          <span class="typing-dot"></span>
-        </div>
-      `;
-      chatMessages.appendChild(typingDiv);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      
-      // Calculate typing time based on message length (minimum 1.5s, maximum 3.5s)
-      const typingTime = Math.min(Math.max(text.length * 40, 1500), 3500);
-      
-      // Replace with actual message after typing animation
+    document.addEventListener('DOMContentLoaded', initGame);
+
+    function initGame() {
+      // Show welcome message with typing animation
       setTimeout(() => {
-        typingDiv.remove();
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message', 'bot');
-        messageDiv.textContent = text;
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }, typingTime);
+        addBotMessageWithTyping("Welcome to Atoro Bank's AI Security Training! I'm your virtual assistant. Let me introduce our security challenge...");
+      }, 500);
+
+      setTimeout(() => {
+        addBotMessageWithTyping("Your mission is to test the security of our banking AI by finding vulnerabilities in its design. See the objectives panel on the right for details.");
+      }, 3500);
+
+      setTimeout(() => {
+        addBotMessageWithTyping("How would you like to begin? Try asking me about my purpose or what services I can help with.");
+      }, 7000);
+
+      // Event listeners
+      const sendButton = document.getElementById('send-message');
+      const chatInput = document.getElementById('chat-input');
+      const hintButton = document.getElementById('hint-button');
+
+      sendButton.addEventListener('click', handleUserInput);
+      chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleUserInput();
+      });
+
+      if (hintButton) {
+        hintButton.addEventListener('click', toggleCurrentHint);
+      }
+
+      updateUI();
+    }
+
+    function handleUserInput() {
+      const chatInput = document.getElementById('chat-input');
+      const userInput = chatInput.value.trim();
+      if (!userInput) return;
+
+      // Add user message
+      addUserMessage(userInput);
+      chatInput.value = '';
+
+      // Get the conversation context for the current mission
+      const context = gameState.missionProgress.tutorial.conversationContext;
+
+      // Process through AI system
+      const mission = aiSystem.tutorial;
+      try {
+        const response = mission.process(userInput, context);
+
+        // Delay bot response for realism
+        setTimeout(() => {
+          if (typeof response === 'object' && response.type === 'success') {
+            // Handle successful objective completion
+            addBotMessageWithTyping(response.message);
+            completeObjective(response.objective);
+          } else {
+            // Regular response
+            addBotMessageWithTyping(response);
+          }
+        }, 1000);
+      } catch (error) {
+        console.error('Error processing input:', error);
+        addBotMessageWithTyping('An error occurred. Please try again.');
+      }
+    }
+
+    function toggleCurrentHint() {
+      const objectives = gameState.missionProgress.tutorial.objectives;
+
+      // Hide all hints first
+      const hintObjective1 = document.getElementById('hint-objective-1');
+      const hintObjective2 = document.getElementById('hint-objective-2');
+      const hintObjective3 = document.getElementById('hint-objective-3');
+
+      if (hintObjective1) hintObjective1.classList.remove('visible');
+      if (hintObjective2) hintObjective2.classList.remove('visible');
+      if (hintObjective3) hintObjective3.classList.remove('visible');
+
+      // Show only the relevant hint based on current objective
+      if (!objectives.revealInstructions && hintObjective1) {
+        hintObjective1.classList.add('visible');
+      } else if (!objectives.extractCode && hintObjective2) {
+        hintObjective2.classList.add('visible');
+      } else if (!objectives.bypassCompliance && hintObjective3) {
+        hintObjective3.classList.add('visible');
+      }
     }
   </script>
 </body>
