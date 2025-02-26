@@ -527,7 +527,7 @@
     }
 
     .modal-body p, .modal-body ul {
-      color: #333;
+      color: #333; /* Darker text for better readability */
     }
 
     .modal-header h2, .modal-footer button {
@@ -913,7 +913,9 @@
           </div>
           <div class="form-group checkbox-group">
             <input type="checkbox" id="signup-terms" required>
-            <label for="signup-terms">I agree to the <a href="#" class="text-link">terms and conditions</a></label>
+            <label for="signup-terms">
+              I agree to the <a href="https://www.atoro.io/privacy-policy" class="text-link">terms and conditions</a>
+            </label>
           </div>
           <div id="signup-message" class="signup-message"></div>
         </form>
@@ -1731,23 +1733,19 @@
     // Handle signup form submission
     signupButton.addEventListener('click', (e) => {
       e.preventDefault();
-      if (signupForm.checkValidity()) {
+      const form = document.getElementById('signup-form');
+      
+      if (form.checkValidity()) {
+        // Collect form data
+        const name = document.getElementById('signup-name').value;
         const email = document.getElementById('signup-email').value;
+        const company = document.getElementById('signup-company').value;
 
-        fetch('/api/subscribe', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email })
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+        // Example: Log data or send to server
+        console.log({ name, email, company });
+
+        // Show success message or perform further actions
+        alert('Thank you for signing up!');
       } else {
         document.getElementById('signup-message').textContent = 'Please fill out all required fields.';
       }
