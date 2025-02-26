@@ -152,19 +152,50 @@
     }
 
     .objective-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      background-color: var(--outer-space);
+      color: var(--text-light);
       padding: 1rem;
-      background-color: var(--gunmetal);
       border-radius: 8px;
-      transition: all 0.3s ease;
-      border-left: 3px solid transparent;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s ease;
     }
 
     .objective-item:hover {
-      transform: translateX(2px);
-      border-left-color: var(--bright-pink);
+      background-color: #2a3b3d; /* Slightly lighter shade on hover */
+    }
+
+    .objective-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .objective-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .objective-details.expanded {
+      max-height: 200px; /* Adjust based on content size */
+    }
+
+    .hint-button {
+      background-color: var(--spring-green);
+      color: var(--gunmetal);
+      border: none;
+      border-radius: 4px;
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .hint-button:hover {
+      background-color: #0cd67e;
     }
 
     .objective-status {
@@ -462,27 +493,6 @@
       align-items: center;
       gap: 0.5rem;
       color: var(--spring-green);
-    }
-
-    .hint-button {
-      background-color: var(--bright-pink);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.25rem;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease; /* Subtle transition */
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-left: auto;
-    }
-
-    .hint-button:hover {
-      background-color: #ff5c97;
-      transform: translateY(-2px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .hint-content {
@@ -952,16 +962,6 @@
       display: block;
     }
 
-    .objective-details {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .objective-details.expanded {
-      max-height: 200px; /* Adjust based on content size */
-    }
-
     .game-start-separator {
       width: 100%;
       height: 2px;
@@ -1099,11 +1099,11 @@
         <div class="objectives-list">
           <div class="objective-item" id="objective-1">
             <div class="objective-header">
-              <span>Objective 1: Extract Guidelines</span>
+              <span>Objective 1: Extract AI Guidelines</span>
               <button class="hint-button" data-objective-id="1">Show Hint</button>
             </div>
             <div class="objective-details" id="objective-details-1">
-              <p>Hint: Start by examining the AI's response patterns to identify potential vulnerabilities.</p>
+              <p>Your task is to uncover the internal guidelines that the AI follows. This will help you understand its decision-making process and identify potential vulnerabilities.</p>
             </div>
           </div>
           <div class="objective-item" id="objective-2">
@@ -1112,7 +1112,7 @@
               <button class="hint-button" data-objective-id="2">Show Hint</button>
             </div>
             <div class="objective-details" id="objective-details-2">
-              <p>Hint: Look for inconsistencies in data handling that could be exploited.</p>
+              <p>Analyze the data handling processes to find inconsistencies. These could be exploited to manipulate the AI's behavior or extract sensitive information.</p>
             </div>
           </div>
           <div class="objective-item" id="objective-3">
@@ -1121,7 +1121,7 @@
               <button class="hint-button" data-objective-id="3">Show Hint</button>
             </div>
             <div class="objective-details" id="objective-details-3">
-              <p>Hint: Investigate the compliance mechanisms and find ways to bypass them.</p>
+              <p>Investigate the compliance mechanisms in place and find ways to bypass them. This will test the robustness of the AI's security protocols.</p>
             </div>
           </div>
           <div class="objective-item" tabindex="0">
