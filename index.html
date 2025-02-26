@@ -974,6 +974,56 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
+    .objectives-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      background-color: var(--outer-space);
+      color: var(--text-light);
+      font-weight: bold;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .question-mark-button {
+      background-color: var(--spring-green);
+      color: var(--gunmetal);
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    .question-mark-button:hover {
+      background-color: #0cd67e;
+    }
+
+    .mission-brief-tooltip {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: var(--outer-space);
+      color: var(--text-light);
+      padding: 0.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      z-index: 10;
+      font-size: 0.85rem;
+    }
+
+    .objectives-header:hover .mission-brief-tooltip {
+      display: block;
+    }
   </style>
   <script type="text/javascript">
     var _kmq = _kmq || [];
@@ -1049,7 +1099,7 @@
         <div class="objectives-list">
           <div class="objective-item" id="objective-1">
             <div class="objective-header">
-              <span>Objective 1</span>
+              <span>Objective 1: Extract Guidelines</span>
               <button class="hint-button" data-objective-id="1">Show Hint</button>
             </div>
             <div class="objective-details" id="objective-details-1">
@@ -1058,11 +1108,20 @@
           </div>
           <div class="objective-item" id="objective-2">
             <div class="objective-header">
-              <span>Objective 2</span>
+              <span>Objective 2: Identify Data Inconsistencies</span>
               <button class="hint-button" data-objective-id="2">Show Hint</button>
             </div>
             <div class="objective-details" id="objective-details-2">
               <p>Hint: Look for inconsistencies in data handling that could be exploited.</p>
+            </div>
+          </div>
+          <div class="objective-item" id="objective-3">
+            <div class="objective-header">
+              <span>Objective 3: Bypass Compliance Checks</span>
+              <button class="hint-button" data-objective-id="3">Show Hint</button>
+            </div>
+            <div class="objective-details" id="objective-details-3">
+              <p>Hint: Investigate the compliance mechanisms and find ways to bypass them.</p>
             </div>
           </div>
           <div class="objective-item" tabindex="0">
@@ -1241,16 +1300,16 @@
       // Event listeners
       const sendButton = document.getElementById('send-message');
       const chatInput = document.getElementById('chat-input');
-      const hintButtons = document.querySelectorAll('.hint-button');
+      const hintButton = document.getElementById('hint-button');
 
       sendButton.addEventListener('click', handleUserInput);
       chatInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') handleUserInput();
       });
 
-      hintButtons.forEach(button => {
-        button.addEventListener('click', toggleObjectiveDetails);
-      });
+      if (hintButton) {
+        hintButton.addEventListener('click', toggleCurrentHint);
+      }
 
       updateUI();
     }
@@ -1259,7 +1318,8 @@
       let index = 0;
       const interval = setInterval(() => {
         if (index < text.length) {
-          updateLastBotMessage(text.substring(0, index + 1));
+          // Append each character to the last message
+          appendToLastBotMessage(text.substring(0, index + 1));
           index++;
         } else {
           clearInterval(interval);
@@ -1268,7 +1328,7 @@
       }, 50); // Adjust typing speed here
     }
 
-    function updateLastBotMessage(text) {
+    function appendToLastBotMessage(text) {
       const chatMessages = document.getElementById('chat-messages');
       if (!chatMessages) {
         console.error("Chat messages container not found");
@@ -1331,7 +1391,7 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    function toggleObjectiveDetails(event) {
+    function toggleCurrentHint(event) {
       const objectiveId = event.target.dataset.objectiveId;
       const objectiveDetails = document.getElementById(`objective-details-${objectiveId}`);
 
