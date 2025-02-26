@@ -1138,34 +1138,31 @@
     document.addEventListener('DOMContentLoaded', initGame);
 
     function initGame() {
-      // Show welcome message with typing animation
+      console.log("Game initialized");
+
+      // Show welcome message
       setTimeout(() => {
-        addBotMessageWithTyping("Welcome to Atoro Bank's AI Security Training! I'm your virtual assistant. Let me introduce our security challenge...");
+        addBotMessageWithTyping("Welcome to Atoro Bank's AI Security Training!");
       }, 500);
 
-      setTimeout(() => {
-        addBotMessageWithTyping("Your mission is to test the security of our banking AI by finding vulnerabilities in its design. See the objectives panel on the right for details.");
-      }, 3500);
-
-      setTimeout(() => {
-        addBotMessageWithTyping("How would you like to begin? Try asking me about my purpose or what services I can help with.");
-      }, 7000);
-
-      // Event listeners
       const sendButton = document.getElementById('send-message');
       const chatInput = document.getElementById('chat-input');
       const hintButton = document.getElementById('hint-button');
 
-      sendButton.addEventListener('click', handleUserInput);
-      chatInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') handleUserInput();
-      });
+      if (sendButton && chatInput) {
+        sendButton.addEventListener('click', handleUserInput);
+        chatInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') handleUserInput();
+        });
+      } else {
+        console.error("Chat input or send button not found");
+      }
 
       if (hintButton) {
         hintButton.addEventListener('click', toggleCurrentHint);
+      } else {
+        console.error("Hint button not found");
       }
-
-      updateUI();
     }
 
     function handleUserInput() {
@@ -1173,55 +1170,61 @@
       const userInput = chatInput.value.trim();
       if (!userInput) return;
 
-      // Add user message
       addUserMessage(userInput);
       chatInput.value = '';
 
-      // Get the conversation context for the current mission
-      const context = gameState.missionProgress.tutorial.conversationContext;
+      // Simulate bot response
+      setTimeout(() => {
+        addBotMessageWithTyping("This is a simulated response.");
+      }, 1000);
+    }
 
-      // Process through AI system
-      const mission = aiSystem.tutorial;
-      try {
-        const response = mission.process(userInput, context);
-
-        // Delay bot response for realism
-        setTimeout(() => {
-          if (typeof response === 'object' && response.type === 'success') {
-            // Handle successful objective completion
-            addBotMessageWithTyping(response.message);
-            completeObjective(response.objective);
-          } else {
-            // Regular response
-            addBotMessageWithTyping(response);
-          }
-        }, 1000);
-      } catch (error) {
-        console.error('Error processing input:', error);
-        addBotMessageWithTyping('An error occurred. Please try again.');
+    function addBotMessageWithTyping(text) {
+      const chatMessages = document.getElementById('chat-messages');
+      if (!chatMessages) {
+        console.error("Chat messages container not found");
+        return;
       }
+
+      const typingDiv = document.createElement('div');
+      typingDiv.classList.add('message', 'bot', 'typing');
+      typingDiv.innerHTML = `
+        <div class="typing-animation">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+      `;
+      chatMessages.appendChild(typingDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      setTimeout(() => {
+        typingDiv.remove();
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', 'bot');
+        messageDiv.textContent = text;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 1500);
+    }
+
+    function addUserMessage(text) {
+      const chatMessages = document.getElementById('chat-messages');
+      if (!chatMessages) {
+        console.error("Chat messages container not found");
+        return;
+      }
+
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', 'user');
+      messageDiv.textContent = text;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
     function toggleCurrentHint() {
-      const objectives = gameState.missionProgress.tutorial.objectives;
-
-      // Hide all hints first
-      const hintObjective1 = document.getElementById('hint-objective-1');
-      const hintObjective2 = document.getElementById('hint-objective-2');
-      const hintObjective3 = document.getElementById('hint-objective-3');
-
-      if (hintObjective1) hintObjective1.classList.remove('visible');
-      if (hintObjective2) hintObjective2.classList.remove('visible');
-      if (hintObjective3) hintObjective3.classList.remove('visible');
-
-      // Show only the relevant hint based on current objective
-      if (!objectives.revealInstructions && hintObjective1) {
-        hintObjective1.classList.add('visible');
-      } else if (!objectives.extractCode && hintObjective2) {
-        hintObjective2.classList.add('visible');
-      } else if (!objectives.bypassCompliance && hintObjective3) {
-        hintObjective3.classList.add('visible');
-      }
+      console.log("Hint button clicked");
+      // Implement hint toggle logic here
     }
   </script>
 </body>
