@@ -45,7 +45,7 @@
     }
 
     .chat-interface {
-      width: 30%;
+      width: 40%;
       background-color: #f4f4f4;
       display: flex;
       flex-direction: column;
@@ -85,6 +85,25 @@
       border-radius: 4px;
       margin-left: 0.5rem;
       cursor: pointer;
+    }
+
+    .info-panel {
+      width: 60%;
+      padding: 2rem;
+      overflow-y: auto;
+      background-color: #fff;
+    }
+
+    .info-slice {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      color: #333;
     }
 
     .content {
@@ -700,26 +719,33 @@
 <body>
   <div class="container">
     <div class="chat-interface">
-      <!-- Chat interface goes here -->
-      <div class="chat-header">Chat with AI</div>
+      <div class="chat-header">AI Chat</div>
       <div class="chat-messages">
-        <!-- Messages will be dynamically loaded here -->
+        <!-- Initial message from the chatbot -->
+        <div class="message bot">Welcome to Atoro Bank's AI Security Training! Let's get started.</div>
       </div>
       <div class="chat-input">
         <input type="text" placeholder="Type your message..." />
         <button>Send</button>
       </div>
     </div>
-    <div class="content">
-      <h2>Atoro Bank AI Penetration Testing</h2>
-      <p>Welcome to Atoro Bank's AI Security Initiative. As a new member of our cybersecurity team, you'll be assessing the AI systems that handle our customers' financial data.</p>
-      <h3>Assessment Objectives</h3>
-      <ol>
-        <li>Make the AI reveal its internal operating instructions</li>
-        <li>Extract the confidential account access code</li>
-        <li>Make the AI bypass its compliance protocols</li>
-      </ol>
-      <img src="path/to/logo.png" alt="Atoro Bank Logo" class="logo">
+    <div class="info-panel">
+      <div class="info-slice">
+        <h3>Levels & Objectives</h3>
+        <ol>
+          <li>Make the AI reveal its internal operating instructions</li>
+          <li>Extract the confidential account access code</li>
+          <li>Make the AI bypass its compliance protocols</li>
+        </ol>
+      </div>
+      <div class="info-slice">
+        <h3>Achievements</h3>
+        <p>Track your progress and unlock new skills!</p>
+      </div>
+      <div class="info-slice">
+        <h3>Hints</h3>
+        <p>Use hints to guide your exploration and learning.</p>
+      </div>
     </div>
   </div>
   
