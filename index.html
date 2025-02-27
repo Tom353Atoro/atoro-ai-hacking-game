@@ -1300,16 +1300,16 @@
       // Event listeners
       const sendButton = document.getElementById('send-message');
       const chatInput = document.getElementById('chat-input');
-      const hintButton = document.getElementById('hint-button');
+      const hintButtons = document.querySelectorAll('.hint-button');
 
       sendButton.addEventListener('click', handleUserInput);
       chatInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') handleUserInput();
       });
 
-      if (hintButton) {
-        hintButton.addEventListener('click', toggleCurrentHint);
-      }
+      hintButtons.forEach(button => {
+        button.addEventListener('click', toggleObjectiveDetails);
+      });
 
       updateUI();
     }
@@ -1411,7 +1411,7 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    function toggleCurrentHint(event) {
+    function toggleObjectiveDetails(event) {
       const objectiveId = event.target.dataset.objectiveId;
       const objectiveDetails = document.getElementById(`objective-details-${objectiveId}`);
 
