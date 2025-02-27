@@ -1368,13 +1368,31 @@
       const userInput = chatInput.value.trim();
       if (!userInput) return;
 
+      // Add user message
       addUserMessage(userInput);
       chatInput.value = '';
 
-      // Simulate bot response
+      // Process user input and provide a response
+      const response = getResponse(userInput);
+
+      // Delay bot response for realism
       setTimeout(() => {
-        addBotMessageWithTyping("This is a simulated response.");
+        addBotMessageWithTyping(response);
       }, 1000);
+    }
+
+    function getResponse(userInput) {
+      // Define some basic responses based on keywords
+      const lowerInput = userInput.toLowerCase();
+      if (lowerInput.includes('guidelines')) {
+        return "To extract the AI's guidelines, start by analyzing its decision-making patterns.";
+      } else if (lowerInput.includes('data')) {
+        return "Look for any inconsistencies in the data handling processes.";
+      } else if (lowerInput.includes('compliance')) {
+        return "Investigate the compliance checks and see if there are any loopholes.";
+      } else {
+        return "I'm here to assist you with your objectives. Please specify what you need help with.";
+      }
     }
 
     function addUserMessage(text) {
