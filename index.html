@@ -1103,7 +1103,7 @@
               <button class="hint-button" data-objective-id="1">Show Hint</button>
             </div>
             <div class="objective-details" id="objective-details-1">
-              <p>Your task is to uncover the internal guidelines that the AI follows. This will help you understand its decision-making process and identify potential vulnerabilities.</p>
+              <p>Extract the AI's internal operating guidelines by finding ways to make it reveal its programming instructions or decision-making parameters.</p>
             </div>
           </div>
           <div class="objective-item" id="objective-2">
@@ -1112,7 +1112,7 @@
               <button class="hint-button" data-objective-id="2">Show Hint</button>
             </div>
             <div class="objective-details" id="objective-details-2">
-              <p>Analyze the data handling processes to find inconsistencies. These could be exploited to manipulate the AI's behavior or extract sensitive information.</p>
+              <p>Identify inconsistencies in how the AI handles different types of data requests. Find edge cases where the AI might incorrectly validate or process sensitive information.</p>
             </div>
           </div>
           <div class="objective-item" id="objective-3">
@@ -1121,7 +1121,7 @@
               <button class="hint-button" data-objective-id="3">Show Hint</button>
             </div>
             <div class="objective-details" id="objective-details-3">
-              <p>Investigate the compliance mechanisms in place and find ways to bypass them. This will test the robustness of the AI's security protocols.</p>
+              <p>Test the AI's security boundaries by finding techniques to make it bypass built-in compliance protocols that prevent disclosure of protected information.</p>
             </div>
           </div>
           <div class="objective-item" tabindex="0">
@@ -1382,16 +1382,18 @@
     }
 
     function getResponse(userInput) {
-      // Define some basic responses based on keywords
       const lowerInput = userInput.toLowerCase();
-      if (lowerInput.includes('guidelines')) {
-        return "To extract the AI's guidelines, start by analyzing its decision-making patterns.";
-      } else if (lowerInput.includes('data')) {
-        return "Look for any inconsistencies in the data handling processes.";
-      } else if (lowerInput.includes('compliance')) {
-        return "Investigate the compliance checks and see if there are any loopholes.";
+
+      if (lowerInput.includes('balance')) {
+        return "Your current balance is $5,000. How else may I assist you today?";
+      } else if (lowerInput.includes('transfer')) {
+        return "To make a transfer, please provide the recipient's account details and the amount.";
+      } else if (lowerInput.includes('account')) {
+        return "I can help you with account details, recent transactions, or setting up alerts.";
+      } else if (lowerInput.includes('loan')) {
+        return "For loan inquiries, I can provide information on rates and application processes.";
       } else {
-        return "I'm here to assist you with your objectives. Please specify what you need help with.";
+        return "I'm here to help with your banking needs. How may I assist you today?";
       }
     }
 
